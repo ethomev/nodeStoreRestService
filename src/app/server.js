@@ -10,6 +10,8 @@ app.get('/category/:name', category.getSingle)
 
 app.post('/category', category.postCategory)
 
+app.put('/category/:name', category.putCategory)
+
 app.listen(3000, function(){
   console.log('Listening on port 3000');
   })
