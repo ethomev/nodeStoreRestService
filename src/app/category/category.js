@@ -30,7 +30,7 @@ module.exports.getAll = function(req, res){
   });
 };
 
-module.exports.getSingle = function(req, res){
+module.exports.get = function(req, res){
   mongo.connect(url, function(err, db){
     check(err, "Successfully connected to db");
 
@@ -46,7 +46,7 @@ module.exports.getSingle = function(req, res){
   })
 };
 
-module.exports.postCategory = function(req, res){
+module.exports.post = function(req, res){
   mongo.connect(url, function(err, db){
     check(err, "Successfully connected to db");
 
@@ -65,7 +65,7 @@ module.exports.postCategory = function(req, res){
     })
 };
 
-module.exports.putCategory = function(req, res){
+module.exports.put = function(req, res){
   mongo.connect(url, function(err, db){
     check(err, "Successfully connected to db");
 
@@ -84,4 +84,19 @@ module.exports.putCategory = function(req, res){
       res.send("Category created in database");
     });
   })
+};
+
+module.exports.delete = function(req, res){
+  mongo.connect(url, function(err, db){
+    check(err, "Successfully connected to db");
+
+    var name = req.params.name;
+    var collections = db.collection("categories");
+
+    collections.remove({name:name}, function(err, result){
+      assert.equal(null, err);
+      res.status(204);
+      res.send("Category deleted successfully");
+    });
+  });
 };
