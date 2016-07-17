@@ -1,6 +1,5 @@
-// This will be the entry point for the service
 var express = require('express');
-var category = require('./category');
+var category = require('./category/category');
 var bodyParser = require('body-parser');
 var app = express();
 
