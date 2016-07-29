@@ -13,13 +13,11 @@ var check = function(err, message){
   console.log(message);
 };
 
-
-
 module.exports.getAll = function(req, res){
   mongo.connect(mongo_db_url, function(err, db){
     check(err, "Successfully connected to db");
 
-    var collections = db.collection("categories");
+    var collections = db.collection("products");
 
     findDocuments({}, collections, function(result){
       res.status(200);
@@ -34,10 +32,10 @@ module.exports.get = function(req, res){
   mongo.connect(mongo_db_url, function(err, db){
     check(err, "Successfully connected to db");
 
-    var name = req.params.name;
-    var collections = db.collection("categories");
+    var model = req.params.model;
+    var collections = db.collection("products");
 
-    findDocuments({name:name},collections, function(result){
+    findDocuments({model:model},collections, function(result){
       res.status(200);
       res.send(result);
     });
@@ -50,16 +48,18 @@ module.exports.post = function(req, res){
   mongo.connect(mongo_db_url, function(err, db){
     check(err, "Successfully connected to db");
 
-    var category = {
-      name:req.body.name,
+    var product = {
+      manufacturer:req.body.manufacturer,
+      model:req.body.model,
       desc:req.body.desc,
-      parent:req.body.parent};
-    var collections = db.collection("categories");
+      price:req.body.price,
+      category:req.body.category};
+    var collections = db.collection("products");
 
-    collections.insert(category, function(err, result){
+    collections.insert(product, function(err, result){
       assert.equal(null, err);
       res.status(201);
-      res.send("Category created in database");
+      res.send("Product created in database");
       });
     db.close();
     })
@@ -69,19 +69,20 @@ module.exports.put = function(req, res){
   mongo.connect(mongo_db_url, function(err, db){
     check(err, "Successfully connected to db");
 
-    var name = req.params.name;
-    var collections = db.collection("categories");
+    var model = req.params.model;
+    var collections = db.collection("products");
 
-    var category = {
-      name:name,
+    var product = {
+      manufacturer:req.body.manufacturer,
+      model:model,
       desc:req.body.desc,
-      parent:req.body.parent
-      };
+            price:req.body.price,
+            category:req.body.category};
 
-    collections.update({name:name}, category, {upsert:true}, function(err, result){
+    collections.update({model:model}, product, {upsert:true}, function(err, result){
       assert.equal(null, err);
       res.status(204);
-      res.send("Category created in database");
+      res.send("Product successfully updated");
     });
   })
 };
@@ -90,13 +91,13 @@ module.exports.delete = function(req, res){
   mongo.connect(mongo_db_url, function(err, db){
     check(err, "Successfully connected to db");
 
-    var name = req.params.name;
-    var collections = db.collection("categories");
+    var model = req.params.model;
+    var collections = db.collection("products");
 
-    collections.remove({name:name}, function(err, result){
+    collections.remove({model:model}, function(err, result){
       assert.equal(null, err);
       res.status(204);
-      res.send("Category deleted successfully");
+      res.send("Product deleted successfully");
     });
   });
 };
