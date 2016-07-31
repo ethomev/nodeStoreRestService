@@ -1,7 +1,7 @@
 var express = require('express');
 var mongo = require('mongodb').MongoClient;
-var category = require('./category/category');
-var product = require('./product/product');
+var category = require('./category');
+var product = require('./product');
 var bodyParser = require('body-parser');
 
 var app = express();
