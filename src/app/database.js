@@ -20,7 +20,7 @@ module.exports.post = function(collection, data, res){
     collections.insert(data, function(err, result){
       assert.equal(null, err);
       res.status(201);
-      res.send("Data successfully inserted");
+      res.send(result.insertedIds[0]);
       });
 };
 
@@ -29,7 +29,7 @@ module.exports.put = function(collection, criteria, data, res){
   collections.update(criteria, data, {upsert:true}, function(err, result){
     assert.equal(null, err);
     res.status(204);
-    res.send("Data successfully inserted");
+    res.send(result);
     });
 };
 
@@ -38,6 +38,6 @@ module.exports.delete = function(collection, criteria, res){
   collections.remove(criteria, function(err, result){
     assert.equal(null, err);
     res.status(204);
-    res.send("Data successfully deleted");
+    res.send(result);
     });
 };
