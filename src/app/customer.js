@@ -1,12 +1,13 @@
 var database = require('./database');
+var ObjectId = require('mongodb').ObjectID;
 
 module.exports.getAll = function(req, res){
   database.get("customers", {}, res);
 };
 
 module.exports.get = function(req, res){
-  var email = req.params.email;
-  database.get("customers", {email:email}, res);
+  var id = req.params.id;
+  database.get("customers", {_id: new ObjectId(id)}, res);
 };
 
 module.exports.post = function(req, res){
@@ -19,16 +20,16 @@ module.exports.post = function(req, res){
 };
 
 module.exports.put = function(req, res){
-  var email = req.params.email;
+  var id = req.params.id;
   var customer = {
     name:req.body.name,
-    email:email,
+    email:req.body.email,
     address:req.body.address
   };
-  database.put("customers", {email:email}, customer, res);
+  database.put("customers", {_id:new ObjectId(id)}, customer, res);
 };
 
 module.exports.delete = function(req, res){
-  var email = req.params.email;
-  database.delete("customers", {email:email}, res);
+  var id = req.params.id;
+  database.delete("customers", {_id:new ObjectId(id)}, res);
 };
