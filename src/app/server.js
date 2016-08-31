@@ -3,6 +3,7 @@ var mongo = require('mongodb').MongoClient;
 var category = require('./category');
 var product = require('./product');
 var customer = require('./customer');
+var sales = require('./sales');
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -27,11 +28,13 @@ app.get('/category', category.getAll)
 app.get('/category/:id', category.get)
 app.get('/product', product.getAll)
 app.get('/product/:id', product.get)
+app.get('/product/:id/sales', sales.getAll)
 app.get('/customer', customer.getAll)
 app.get('/customer/:id', customer.get)
 
 app.post('/category', category.post)
 app.post('/product', product.post)
+app.post('/product/:id/sales', sales.post)
 app.post('/customer', customer.post)
 
 app.put('/category/:id', category.put)

@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var findDocuments = function(fields, collection, callback){
-  collection.find(fields).toArray(function(err,docs){
+var findDocuments = function(criteria, collection, callback){
+  collection.find(criteria).toArray(function(err,docs){
     assert.equal(null,err);
     callback(docs);
   })
@@ -13,6 +13,15 @@ module.exports.get = function(collection, criteria, res){
     res.status(200);
     res.send(result);
   });
+};
+
+module.exports.getFields = function(collection, criteria, fields, res){
+  var collection = db.collection(collection);
+  collection.find(criteria,fields).toArray(function(err,docs){
+    assert.equal(null, err);
+    res.status(200);
+    res.send(docs);
+  })
 };
 
 module.exports.post = function(collection, data, res){
