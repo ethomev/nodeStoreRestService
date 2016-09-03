@@ -11,22 +11,12 @@ module.exports.get = function(req, res){
 };
 
 module.exports.post = function(req, res){
-  var customer = {
-    name:req.body.name,
-    email:req.body.email,
-    address:req.body.address
-  };
-  database.post("customers", customer, res);
+  database.post("customers", req.body, res);
 };
 
 module.exports.put = function(req, res){
   var id = req.params.id;
-  var customer = {
-    name:req.body.name,
-    email:req.body.email,
-    address:req.body.address
-  };
-  database.put("customers", {_id:new ObjectId(id)}, customer, res);
+  database.put("customers", {_id:new ObjectId(id)}, req.body, res);
 };
 
 module.exports.delete = function(req, res){

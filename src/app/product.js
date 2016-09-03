@@ -11,24 +11,12 @@ module.exports.get = function(req, res){
 };
 
 module.exports.post = function(req, res){
-  var product = {
-    manufacturer:req.body.manufacturer,
-    model:req.body.model,
-    desc:req.body.desc,
-    price:req.body.price,
-    category:req.body.category};
-  database.post("products",product, res);
+  database.post("products",req.body, res);
 };
 
 module.exports.put = function(req, res){
     var id = req.params.id;
-    var product = {
-      manufacturer:req.body.manufacturer,
-      model:req.body.model,
-      desc:req.body.desc,
-      price:req.body.price,
-      category:req.body.category};
-    database.put("products", {_id:new ObjectId(id)}, product, res);
+    database.put("products", {_id:new ObjectId(id)}, req.body, res);
 };
 
 module.exports.delete = function(req, res){

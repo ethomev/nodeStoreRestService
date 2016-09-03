@@ -29,7 +29,7 @@ module.exports.post = function(collection, data, res){
     collections.insert(data, function(err, result){
       assert.equal(null, err);
       res.status(201);
-      res.send(result.insertedIds[0]);
+      res.send(result.ops[0]);
       });
 };
 
