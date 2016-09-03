@@ -4,6 +4,7 @@ var category = require('./category');
 var product = require('./product');
 var customer = require('./customer');
 var sales = require('./sales');
+var popularity = require('./popularity');
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -31,6 +32,7 @@ app.get('/product/:id', product.get)
 app.get('/product/:id/sales', sales.getAll)
 app.get('/customer', customer.getAll)
 app.get('/customer/:id', customer.get)
+app.get('/mostPopular/:category', popularity.get)
 
 app.post('/category', category.post)
 app.post('/product', product.post)
