@@ -15,9 +15,9 @@ module.exports.get = function(collection, criteria, res){
   });
 };
 
-module.exports.getFields = function(collection, criteria, fields, res){
+module.exports.getFields = function(collection, criteria, fields, sortOrder, res){
   var collection = db.collection(collection);
-  collection.find(criteria,fields).toArray(function(err,docs){
+  collection.find(criteria,fields).sort(sortOrder).toArray(function(err,docs){
     assert.equal(null, err);
     res.status(200);
     res.send(docs);
