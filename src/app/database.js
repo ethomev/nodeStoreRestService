@@ -24,6 +24,14 @@ module.exports.getFields = function(collection, criteria, fields, sortOrder, res
   })
 };
 
+module.exports.getSetAmountOfDocuments = function(collection, criteria, fields, sortOrder, limitAmount, res){
+  var collection = db.collection(collection);
+  collection.find(criteria,fields).sort(sortOrder).limit(limitAmount).toArray(function(err,docs){
+      assert.equal(null, err);
+      res.status(200);
+      res.send(docs);
+    })
+};
 module.exports.post = function(collection, data, res){
   var collections = db.collection(collection);
     collections.insert(data, function(err, result){
