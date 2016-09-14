@@ -43,6 +43,7 @@ app.post('/customer', customer.post)
 
 app.put('/category/:id', category.put)
 app.put('/product/:id', product.put)
+app.put('/product/:id/sales/:customerId',sales.put)
 app.put('/customer/:id', customer.put)
 
 app.delete('/category/:id', category.delete)
