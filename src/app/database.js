@@ -15,6 +15,15 @@ module.exports.get = function(collection, criteria, res){
   });
 };
 
+module.exports.getAndSort = function(collection, criteria, sortOrder, res){
+  var collections = db.collection(collection);
+  collections.find(criteria).sort(sortOrder).toArray(function(err,docs){
+      assert.equal(null,err);
+      res.status(200);
+      res.send(docs);
+    })
+};
+
 module.exports.getFields = function(collection, criteria, fields, sortOrder, res){
   var collection = db.collection(collection);
   collection.find(criteria,fields).sort(sortOrder).toArray(function(err,docs){
