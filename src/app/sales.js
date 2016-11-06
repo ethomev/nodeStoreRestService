@@ -8,8 +8,8 @@ module.exports.getAll = function(req,res){
 
 module.exports.post = function(req, res){
   var productId = req.params.id;
-  database.put("products",{_id:new ObjectId(productId)},{"$push": {"sales":req.body},"$inc" : {'metadata.numberOfSales' : 1,'metadata.sumOfStars':
-  req.body.review.stars}},res)
+  database.putSale("products",{_id:new ObjectId(productId)},{"$push": {"sales":req.body},"$inc" : {'metadata.numberOfSales' : 1,'metadata.sumOfStars':
+  req.body.stars}},res)
 };
 
 module.exports.put = function(req, res){

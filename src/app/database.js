@@ -59,6 +59,19 @@ module.exports.put = function(collection, criteria, data, res){
     });
 };
 
+module.exports.putSale = function(collection, criteria, data, res){
+  var collections = db.collection(collection);
+  collections.update(criteria, data, {upsert:true}, function(err, result){
+    assert.equal(null, err);
+      collections.find(criteria,{'sales':1}).toArray(function(err,docs){
+        console.log(docs[0].sales[0]);
+        assert.equal(null, err);
+        res.status(201);
+        res.send(docs[0].sales[0]);
+      })
+    });
+};
+
 module.exports.delete = function(collection, criteria, res){
   var collections = db.collection(collection);
   collections.remove(criteria, function(err, result){

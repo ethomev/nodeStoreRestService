@@ -2,7 +2,7 @@ var database = require('./database');
 var ObjectId = require('mongodb').ObjectID;
 
 module.exports.getAll = function(req, res){
-  database.get("categories", {}, res);
+  database.getAndSort("categories", req.query, {}, res);
 };
 
 module.exports.get = function(req, res){
