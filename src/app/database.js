@@ -11,7 +11,7 @@ module.exports.get = function(collection, criteria, res){
   var collections = db.collection(collection);
   findDocuments(criteria, collections, function(result){
     res.status(200);
-    res.send(result);
+    res.send(result[0]);
   });
 };
 
