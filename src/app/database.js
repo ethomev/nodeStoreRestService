@@ -31,7 +31,7 @@ module.exports.getFieldsOfEntry = function(collectionName, id, fields, sortOrder
   collection.find(criteria,fields).sort(sortOrder).toArray(function(err,docs){
     assert.equal(null, err);
     res.status(200);
-    res.send(docs[0]);
+    res.send(docs);
   })
 };
 
