@@ -23,3 +23,7 @@ module.exports.delete = function(req, res){
   var id = req.params.id;
   database.delete("customers", {_id:new ObjectId(id)}, res);
 };
+
+module.exports.deleteAll = function(req, res){
+  database.deleteAll("customers", res);
+}

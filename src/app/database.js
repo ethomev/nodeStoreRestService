@@ -81,3 +81,12 @@ module.exports.delete = function(collection, criteria, res){
     res.send(result);
     });
 };
+
+module.exports.deleteAll = function(collectionName, res){
+  var collection = db.collection(collectionName);
+  collection.remove({}, function(err, result){
+    assert.equal(null, err);
+    res.status(204);
+    res.send(result);
+  })
+}
