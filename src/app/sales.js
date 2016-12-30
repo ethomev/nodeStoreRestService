@@ -16,7 +16,7 @@ module.exports.put = function(req, res){
   var productId = req.params.id;
   var customerId = req.params.customerId;
   database.put("products", {_id:new ObjectId(productId), "sales" : {"$elemMatch" : {"customer":{ "$eq" : customerId}}}},
-  {"$set": {"sales.$": {"customer":customerId, review:req.body}}}, res);
+  {"$set": {"sales.$": {customer:customerId, title:req.body.title, body:req.body.body, stars:req.body.stars}}}, res);
 };
 
 module.exports.delete = function(req, res){
