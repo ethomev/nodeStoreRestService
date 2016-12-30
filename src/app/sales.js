@@ -3,7 +3,7 @@ var ObjectId = require('mongodb').ObjectID;
 
 module.exports.getAll = function(req,res){
   var id = req.params.id;
-  database.getFields('products', {_id:new ObjectId(id)}, {'sales':1}, {}, res);
+  database.getFieldsOfEntry('products', id, {'sales':1}, {}, res);
 }
 
 module.exports.post = function(req, res){

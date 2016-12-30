@@ -1,4 +1,5 @@
 var assert = require('assert');
+var ObjectId = require('mongodb').ObjectID;
 
 var findDocuments = function(criteria, collection, callback){
   collection.find(criteria).toArray(function(err,docs){
@@ -24,17 +25,18 @@ module.exports.getAndSort = function(collection, criteria, sortOrder, res){
     })
 };
 
-module.exports.getFields = function(collection, criteria, fields, sortOrder, res){
-  var collection = db.collection(collection);
+module.exports.getFieldsOfEntry = function(collectionName, id, fields, sortOrder, res){
+  var collection = db.collection(collectionName);
+  var criteria = {_id:new ObjectId(id)};
   collection.find(criteria,fields).sort(sortOrder).toArray(function(err,docs){
     assert.equal(null, err);
     res.status(200);
-    res.send(docs);
+    res.send(docs[0]);
   })
 };
 
-module.exports.getSetAmountOfDocuments = function(collection, criteria, fields, sortOrder, limitAmount, res){
-  var collection = db.collection(collection);
+module.exports.getSetAmountOfDocuments = function(collectionName, criteria, fields, sortOrder, limitAmount, res){
+  var collection = db.collection(collectionName);
   collection.find(criteria,fields).sort(sortOrder).limit(limitAmount).toArray(function(err,docs){
       assert.equal(null, err);
       res.status(200);
@@ -61,10 +63,9 @@ module.exports.put = function(collection, criteria, data, res){
 
 module.exports.putSale = function(collection, criteria, data, res){
   var collections = db.collection(collection);
-  collections.update(criteria, data, {upsert:true}, function(err, result){
+  collections.update(criteria, data, {upsert:true}, function(err){
     assert.equal(null, err);
       collections.find(criteria,{'sales':1}).toArray(function(err,docs){
-        console.log(docs[0].sales[0]);
         assert.equal(null, err);
         res.status(201);
         res.send(docs[0].sales[0]);
