@@ -1,0 +1,8 @@
+> db.categories.find()
+{ "_id" : ObjectId("594cf961a8c02e4e6a1c95d2"), "name" : "4 string Bass Guitar", "desc" : "slappa da bass, man", "parent" : "Bass Guitar" }
+
+> db.customers.find()
+{ "_id" : ObjectId("594cf963a8c02e4e6a1c95d5"), "name" : "Thomas Melville", "email" : "thomas@mel.ie", "address" : "Drumlosh" }
+
+> db.products.find()
+{ "_id" : ObjectId("594cf963a8c02e4e6a1c95d7"), "model" : "grind", "manufacturer" : "peavey", "price" : 800, "desc" : "4 string wood finish guitar", "category" : "4 string bass guitar", "sales" : [ { "customer" : "Thomas Melville", "title" : "great machine", "body" : "it's just a bit heavy", "stars" : 4 } ], "metadata" : { "numberOfSales" : 1, "sumOfStars" : 5 } }
