@@ -4,7 +4,7 @@
   "description": "A REST Service for a Music Store",
   "main": "src/app/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start" : "node src/app/server.js"
   },
   "keywords": ["college project"],
   "author": "Thomas Melville",
