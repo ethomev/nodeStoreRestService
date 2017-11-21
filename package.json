@@ -4,9 +4,12 @@
   "description": "A REST Service for a Music Store",
   "main": "src/app/server.js",
   "scripts": {
-    "start" : "node src/app/server.js"
+    "start": "node src/app/server.js",
+    "test":  "NODE_ENV=test mocha src/test/*"
   },
-  "keywords": ["college project"],
+  "keywords": [
+    "college project"
+  ],
   "author": "Thomas Melville",
   "license": "ISC",
   "engines": {
@@ -15,7 +18,9 @@
   "dependencies": {
     "assert": "1.4.1",
     "body-parser": "1.15.2",
+    "chai": "^4.1.2",
     "express": "4.14.0",
+    "mocha": "^4.0.1",
     "mongodb": "2.2.2"
   }
 }
