@@ -1,12 +1,6 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - npm install
-  pre_build:
-    commands:
-      - npm test
   build:
     commands:
       - docker build -t thomasmelville/music-store .
