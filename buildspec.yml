@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install
+  test:
+    commands:
+      - npm test
+  build:
+    commands:
+      - docker build -t thomasmelville/music-store .
+  push:
+    commands:
+      - docker push thomasmelville/music-store:latest
