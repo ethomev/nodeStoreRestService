@@ -1,9 +1,15 @@
 version: 0.2
 
 phases:
+  pre_build:
+    commands:
+      - echo Logging into Docker hub
+      - docker login --username thomasmelville --password Octavia
   build:
     commands:
+      - echo Building the image
       - docker build -t thomasmelville/music-store .
   post_build:
     commands:
+      - echo pushing the image
       - docker push thomasmelville/music-store:latest
