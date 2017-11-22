@@ -1,3 +1,4 @@
+var nconf = require('nconf');
 var express = require('express');
 var mongo = require('mongodb').MongoClient;
 var category = require('./category');
@@ -13,7 +14,15 @@ app.use(bodyParser.json())
 
 db = null;
 
-mongo.connect("mongodb://localhost:27017/music_store", function(err, database){
+nconf.argv().env().file({ file: 'config.json'});
+
+var host = nconf.get("host");
+var port = nconf.get("port");
+var databaseName = nconf.get("database");
+var mongodbUrl = "mongodb://"+host+":"+port+"/"+databaseName;
+console.log("URL: "+mongodbUrl);
+
+mongo.connect(mongodbUrl, function(err, database){
   if (err) {
     console.log(err);
     process.exit(1);
