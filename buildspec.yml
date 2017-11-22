@@ -4,12 +4,12 @@ phases:
   install:
     commands:
       - npm install
-  test:
+  pre_build:
     commands:
       - npm test
   build:
     commands:
       - docker build -t thomasmelville/music-store .
-  push:
+  post_build:
     commands:
       - docker push thomasmelville/music-store:latest
